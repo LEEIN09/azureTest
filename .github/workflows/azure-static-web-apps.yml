@@ -38,7 +38,7 @@ jobs:
       - name: Deploy to Azure Storage
         uses: azure/CLI@v1
         env:
-          MY_STORAGE_KEY: ${{ secrets.AZURE_STORAGE_KEY }} # 여기서 먼저 정의
+          MY_STORAGE_KEY: ${{ secrets.AZURE_STATIC_KEY }} # 여기서 먼저 정의
         with:
           inlineScript: |
             az storage blob upload-batch \
