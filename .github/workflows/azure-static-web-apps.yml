@@ -39,4 +39,10 @@ jobs:
         uses: azure/CLI@v1
         with:
           inlineScript: |
-            az storage blob upload-batch -s ./ -d '$web' --account-name snowyoung --auth-mode key --overwrite true --account-key ${{ secrets.AZURE_STORAGE_KEY }}
+            az storage blob upload-batch \
+              --source ./ \
+              --destination '$web' \
+              --account-name snowyoung77 \
+              --account-key "${{ secrets.AZURE_STORAGE_KEY }}" \
+              --overwrite true \
+              --auth-mode key
