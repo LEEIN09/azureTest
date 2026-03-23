@@ -34,15 +34,17 @@ jobs:
           skip_app_build: true
           deployment_environment: "production"
 
-      # [2] Storage Account 배포 (보안 키를 사용한 즉시 반영)
+      # [2] Storage Account 배포 (환경 변수 방식 - 권장)
       - name: Deploy to Azure Storage
         uses: azure/CLI@v1
+        env:
+          MY_STORAGE_KEY: ${{ secrets.AZURE_STORAGE_KEY }} # 여기서 먼저 정의
         with:
           inlineScript: |
             az storage blob upload-batch \
               --source ./ \
               --destination '$web' \
               --account-name snowyoung77 \
-              --account-key "${{ secrets.AZURE_STORAGE_KEY }}" \
+              --account-key "$MY_STORAGE_KEY" \
               --overwrite true \
               --auth-mode key
